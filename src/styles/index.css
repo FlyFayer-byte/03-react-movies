@@ -1,0 +1,31 @@
+@import 'modern-normalize/modern-normalize.css';
+
+/* Глобальні дрібні правки */
+:root {
+  --app-bg: #0b0b0b;
+  --app-fg: #f6f6f6;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+body {
+  background: var(--app-bg);
+  color: var(--app-fg);
+  font-family:
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
+}
+
+/* Портал для модалки */
+#modal-root {
+  position: relative;
+  z-index: 9999;
+}

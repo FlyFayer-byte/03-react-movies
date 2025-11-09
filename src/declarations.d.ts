@@ -1,1 +1,1 @@
-declare module "modern-normalize";
+declare module 'modern-normalize';
