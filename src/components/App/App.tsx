@@ -39,15 +39,13 @@ export default function App() {
         toast('No movies found for your request.');
       }
       setMovies(data.results);
-    } catch (e) {
-      if (
-        (e as any)?.name !== 'CanceledError' &&
-        (e as any)?.message !== 'canceled'
-      ) {
-        console.error(e);
-        setError('fetch_error');
-      }
-    } finally {
+    } catch (e: unknown) {
+  if (e instanceof Error && e.name !== 'CanceledError' && e.message !== 'canceled') {
+    console.error(e);
+    setError('fetch_error');
+  }
+}
+ finally {
       setLoading(false);
     }
   };
