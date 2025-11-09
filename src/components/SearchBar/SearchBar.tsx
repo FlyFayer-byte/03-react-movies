@@ -6,7 +6,7 @@ export interface SearchBarProps {
   onSubmit: (query: string) => void;
 }
 
-// Обробка форми через Form Actions (React 19): <form action={...}>
+// Обробка форми 
 export default function SearchBar({ onSubmit }: SearchBarProps) {
   const [, formAction] = useActionState(
     async (_prev: null, formData: FormData) => {

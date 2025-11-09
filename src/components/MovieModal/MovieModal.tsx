@@ -12,31 +12,27 @@ export interface MovieModalProps {
 const modalRoot = document.getElementById('modal-root') as HTMLElement | null;
 
 export default function MovieModal({ movie, onClose }: MovieModalProps) {
-  if (!movie || !modalRoot) return null;
-
+  // 🧠 Хук завжди викликається — незалежно від умови
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        onClose();
-      }
+      if (event.key === 'Escape') onClose();
     };
 
     document.addEventListener('keydown', handleKeyDown);
-
-    // Забороняємо скрол сторінки, поки відкрита модалка
     const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
 
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
-      document.body.style.overflow = prevOverflow; // відновлення
+      document.body.style.overflow = prevOverflow;
     };
   }, [onClose]);
 
+  // ⚠️ Перевірка після хуків
+  if (!movie || !modalRoot) return null;
+
   const handleBackdropClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    if (event.target === event.currentTarget) {
-      onClose();
-    }
+    if (event.target === event.currentTarget) onClose();
   };
 
   const { title, overview, release_date, vote_average, backdrop_path } = movie;

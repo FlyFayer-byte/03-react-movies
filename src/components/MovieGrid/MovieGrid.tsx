@@ -21,12 +21,18 @@ export default function MovieGrid({ movies, onSelect }: MovieGridProps) {
             tabIndex={0}
             onKeyDown={e => e.key === 'Enter' && onSelect(movie)}
           >
-            <img
-              className={css.image}
-              src={tmdbImg(movie.poster_path, 'w500') || ''}
-              alt={movie.title}
-              loading="lazy"
-            />
+            {movie.poster_path ? (
+              <img
+                className={css.image}
+                src={tmdbImg(movie.poster_path, 'w500')}
+                alt={movie.title}
+                loading="lazy"
+              />
+            ) : (
+              <div className={css.placeholder}>
+                <p>No image</p>
+              </div>
+            )}
             <h2 className={css.title}>{movie.title}</h2>
           </div>
         </li>
