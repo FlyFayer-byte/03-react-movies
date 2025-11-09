@@ -1,12 +1,13 @@
 import { useMemo, useRef, useState } from 'react';
-import SearchBar from './components/SearchBar/SearchBar';
-import MovieGrid from './components/MovieGrid/MovieGrid';
-import Loader from './components/Loader/Loader';
-import ErrorMessage from './components/ErrorMessage/ErrorMessage';
-import MovieModal from './components/MovieModal/MovieModal';
-import type { Movie } from './types/movie';
-import { fetchMovies } from './services/movieService';
+import SearchBar from '../SearchBar/SearchBar';
+import MovieGrid from '../MovieGrid/MovieGrid';
+import Loader from '../Loader/Loader';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import MovieModal from '../MovieModal/MovieModal';
+import type { Movie } from '../../types/movie';
+import { fetchMovies } from '../../services/movieService';
 import toast, { Toaster } from 'react-hot-toast';
+import styles from './App.module.css';
 
 export default function App() {
   const [movies, setMovies] = useState<Movie[]>([]);
@@ -21,7 +22,6 @@ export default function App() {
   );
 
   const onSubmit = async (query: string) => {
-    // Скасувати попередній запит, очистити попередні фільми
     abortRef.current?.abort();
     abortRef.current = new AbortController();
 
@@ -36,7 +36,7 @@ export default function App() {
         signal: abortRef.current.signal,
       });
       if (!data.results.length) {
-        toast.error('No movies found for your request.');
+        toast('No movies found for your request.');
       }
       setMovies(data.results);
     } catch (e) {
@@ -53,7 +53,7 @@ export default function App() {
   };
 
   return (
-    <>
+    <div className={styles.app}>
       <Toaster position="top-center" />
       <SearchBar onSubmit={onSubmit} />
 
@@ -62,6 +62,6 @@ export default function App() {
       {canShowGrid && <MovieGrid movies={movies} onSelect={setSelected} />}
 
       <MovieModal movie={selected} onClose={() => setSelected(null)} />
-    </>
+    </div>
   );
 }
