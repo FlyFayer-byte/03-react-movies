@@ -36,7 +36,7 @@ export default function App() {
         signal: abortRef.current.signal,
       });
       if (!data.results.length) {
-        toast('No movies found for your request.');
+        toast.error('No movies found for your request.');
       }
       setMovies(data.results);
     } catch (e: unknown) {
