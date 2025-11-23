@@ -1,4 +1,7 @@
 import { useActionState } from 'react';
+// Якщо в результаті запиту масив фільмів порожній, виводьте повідомлення:
+// No movies found for your request.
+// Ця перевірка виконується в App при обробці HTTP-запиту. Для сповіщень використовуйте бібліотеку React Hot Toast.
 import toast from 'react-hot-toast';
 import styles from './SearchBar.module.css';
 
@@ -23,7 +26,7 @@ export default function SearchBar({ onSubmit }: SearchBarProps) {
     },
     null
   );
-
+// Компонент SearchBar має створювати DOM-елемент наступної структури:
   return (
     <header className={styles.header}>
       <div className={styles.container}>

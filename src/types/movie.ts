@@ -1,3 +1,4 @@
+// Ось як буде виглядати інтерфейс для типізації одного фільму.
 export interface Movie {
   id: number;
   poster_path: string;
